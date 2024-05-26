@@ -1,0 +1,15 @@
+{
+  "name": "test-bot",
+  "version": "1.0.0",
+  "description": "this is the package for my dicord bot yet unsure about what to do about it 5/27/24",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "test-bot repo"
+  },
+  "author": "",
+  "license": "MIT"
+}
