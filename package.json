@@ -11,5 +11,9 @@
     "url": "test-bot repo"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": [],
+  "dependencies": {
+    "discord.js": "^14.15.2"
+  }
 }
