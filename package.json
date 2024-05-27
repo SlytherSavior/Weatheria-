@@ -15,5 +15,8 @@
   "keywords": [],
   "dependencies": {
     "discord.js": "^14.15.2"
+  },
+  "devDependencies": {
+    "eslint": "^9.3.0"
   }
 }
