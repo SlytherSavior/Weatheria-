@@ -39,6 +39,8 @@ For any questions or suggestions, feel free to reach out to me:
 
 - **📧 Email**: shrijan5414@gmail.com
 - **🔗 LinkedIn**: [linkedin.com/in/slyther](https://linkedin.com/in/slyther)
+- **🐦 Twitter**: [twitter.com/SlytherShrijan](https://x.com/SlytherShrijan)
+- **🌐 Website**: [shrijanpoudel.com.np](https://www.shrijanpoudel.com.np)
 
 ## 📜 License
 
