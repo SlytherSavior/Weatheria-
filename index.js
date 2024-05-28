@@ -1,62 +1,41 @@
-// Require the necessary discord.js classes
-const { Client, Events, GatewayIntentBits, ActivityType } = require('discord.js');
+const fs = require('fs');
+const path = require('path');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
 require('dotenv').config(); // Load environmental variables from the .env file as well
-const https = require("https");
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-// // Create a new client instance
-// const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-// const token = process.env.DISCORD_TOKEN;
-const weatherApi = process.env.WEATHER_API_KEY; 
+// Commands collection
+client.commands = new Collection();
 
-//fucntion for getting weather data
-function setUrl(cityName) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${weatherApi}`;
-    return url;
+// Path to commands directory
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+// Loading commands
+for (const file of commandFiles) {
+    const filePath = path.join(commandsPath, file);
+    const command = require(filePath);
+    client.commands.set(command.data.name, command);
 }
 
+client.once('ready', () => {
+    console.log(`Logged in as ${client.user.tag}!`);
+});
 
-function getWeatherData(cityname, callback) { 
-    const url = setUrl(cityname) ;
+// Handle command interactions
+client.on('interactionCreate', async interaction => {
+    if (!interaction.isCommand()) return;
 
-    https.get(url, (resp) => { 
-        let data = ''; 
+    const command = client.commands.get(interaction.commandName);
 
-        // A chunk of data has been recieved 
-        resp.on('data', (chunk) => { 
-            data += chunk; 
-        }); 
+    if (!command) return;
 
+    try {
+        await command.execute(interaction);
+    } catch (error) {
+        console.error(error);
+        await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+    }
+});
 
-        //The whole response has been recieved 
-        resp.on('end', () => { 
-            if(resp.statusCode === 200 ) { 
-                const weatherData = JSON.parse(data); 
-                const temp = weatherData.main.temp; 
-                const description = weatherData.weaather.description; 
-                callback(null, weatherData) ; 
-            }else { 
-                callback(`Error ${resp.statusCode} - ${resp.statusMessage}`);
-            }
-        }).on('error', (err) => { 
-            callback(err);
-        })
-
-
-    })
-
-}
-
-// // When the client is ready, run this code (only once).
-// client.once(Events.ClientReady, readyClient => {
-//     console.log(`Ready! Logged in as ${readyClient.user.tag}`);
-    
-//     // Set the bot status to Watching with happiness
-//     client.user.setPresence({ 
-//         activities: [{
-//             name: 'with happiness',
-//             type: ActivityType.Watching,
-//             url: 'https://github.com/SlytherSavior/Test-Bot'
-//         }],
-//         status: 'dnd'
-//     });
-// });
+client.login(process.env.DISCORD_TOKEN);
