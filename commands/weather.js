@@ -24,11 +24,12 @@ module.exports = {
                 if (response.statusCode === 200) {
                     interaction.reply(`Weather in ${city}: ${weatherData.weather[0].description}, Temperature: ${weatherData.main.temp}°C`);
                 } else {
+                    console.error(`Failed to get weather data: ${weatherData.message}`);
                     interaction.reply(`Failed to get weather data for ${city}`);
                 }
             });
         }).on('error', error => {
-            console.error(error);
+            console.error(`Error fetching weather data: ${error.message}`);
             interaction.reply('Error fetching weather data.');
         });
     }
