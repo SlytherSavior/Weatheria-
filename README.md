@@ -1,12 +1,13 @@
 # 🌦️ Weatheria
 
-Weatheria is a Discord bot designed to provide comprehensive weather updates. Built with Discord.js, Node.js, and the OpenWeather API, this project is currently in development and serves as a foundation for honing coding skills and deepening understanding of JavaScript.
+Weatheria is a Discord bot designed to provide comprehensive weather updates. Built with Discord.js, Node.js, and the OpenWeather API, this project is now finalized and ready for deployment in your Discord server.
 
 ## 🚀 Features
 
-- Fetches current weather information for any city.
-- Provides detailed weather data including temperature, humidity, wind speed, and more.
-- Simple and intuitive command usage.
+- **Current Weather**: Fetches current weather information for any city.
+- **Weather Forecast**: Provides 5-day weather forecasts for any city.
+- **Multi-city Weather**: Fetches weather information for multiple cities at once.
+- **Help Command**: Lists all available commands and their usage.
 
 ## 🛠️ Technologies Used
 
@@ -22,16 +23,66 @@ Weatheria is a Discord bot designed to provide comprehensive weather updates. Bu
 
 ## 🚧 Current Status
 
-Weatheria is currently in development. The primary goal is to make it fully functional for all weather-related data tasks. This project is a stepping stone in the journey to become a proficient full-stack developer.
+Weatheria is now finalized and available for deployment in Discord servers. This project has been a significant step in the journey to becoming a proficient full-stack developer.
 
 ## 📋 Usage
 
-To use the bot, type `/weather <city_name>` in any Discord channel where the bot is active. For example:
+### Commands
+
+- `/weather <city_name>`: Fetches current weather for the specified city.
+- `/forecast <city_name>`: Provides a 5-day weather forecast for the specified city.
+- `/multiweather <city1, city2, ...>`: Fetches current weather for multiple cities.
+- `/help`: Lists all available commands and their usage.
+
+### Example
+
 /weather Kathmandu
+/forecast Kathmandu
+/multiweather Kathmandu, Pokhara, Lalitpur
+
+
+## 🌐 Live Link
+
+*Coming soon!*
+
+## ⚙️ Setup
+
+To set up Weatheria locally, follow these steps:
+
+1. **Clone the Repository**
+    ```bash
+    git clone https://github.com/your-username/weatheria.git
+    cd weatheria
+    ```
+
+2. **Install Dependencies**
+    ```bash
+    npm install
+    ```
+
+3. **Create a `.env` File**
+    Create a `.env` file in the root directory and add your Discord bot token and OpenWeather API key:
+    ```
+    DISCORD_TOKEN=your_discord_token_here
+    OPENWEATHER_API_KEY=your_openweather_api_key_here
+    ```
+
+4. **Deploy Commands**
+    ```bash
+    node deploy-commands.js
+    ```
+
+5. **Run the Bot**
+    ```bash
+    node index.js
+    ```
+
+6. **Invite the Bot to Your Server**
+    Generate an invite link for your bot using the Discord Developer Portal and invite it to your server.
 
 ## 🐞 Known Issues
 
-- Currently work in progress!
+- No known issues at this time!
 
 ## 📫 Contact
 
@@ -45,3 +96,4 @@ For any questions or suggestions, feel free to reach out:
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
