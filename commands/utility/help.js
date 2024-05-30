@@ -4,6 +4,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('help')
         .setDescription('Displays information about available commands.'),
+
     async execute(interaction) {
         const commands = interaction.client.commands;
 
