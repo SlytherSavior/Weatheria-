@@ -31,7 +31,7 @@ To use the bot, type `/weather <city_name>` in any Discord channel where the bot
 
 ## 🐞 Known Issues
 
-- **Bug**: The bot does not respond to the `/weather <city_name>` command.
+- currently wip!
 
 ## 📫 Contact
 
