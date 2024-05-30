@@ -83,7 +83,7 @@ To set up Weatheria locally, follow these steps:
 
 ## 🐞 Known Issues
 
-- No known issues at this time!
+- Not exactly an issue but gotta fix the way it displays messages ! Embedding messages in coming days ! 
 
 ## 📫 Contact
 
