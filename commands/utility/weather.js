@@ -13,6 +13,8 @@ module.exports = {
         const city = interaction.options.getString('city');
         const apiKey = process.env.WEATHER_API_KEY;
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+        const formatDiscordMsg = " ``` ";
+
 
         https.get(url, response => {
             let data = '';
@@ -22,7 +24,7 @@ module.exports = {
             response.on('end', () => {
                 const weatherData = JSON.parse(data);
                 if (response.statusCode === 200) {
-                    interaction.reply(`Weather in ${city}: ${weatherData.weather[0].description}, Temperature: ${weatherData.main.temp}°C`);
+                    interaction.reply(`${formatDiscordMsg} Weather in ${city}: ${weatherData.weather[0].description}, Temperature: ${weatherData.main.temp}°C ${formatDiscordMsg}`);
                 } else {
                     console.error(`Failed to get weather data: ${weatherData.message}`);
                     interaction.reply(`Failed to get weather data for ${city}`);
