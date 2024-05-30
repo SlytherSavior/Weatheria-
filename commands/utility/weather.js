@@ -1,8 +1,13 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const https = require('https');
+const weatherEmoji = '🌤️';
+const tempEmoji = '🌡️';
+const sunriseEmoji = '🌅';
+const sunsetEmoji = '🌇';
 
 module.exports = {
     data: new SlashCommandBuilder()
+
         .setName('weather')
         .setDescription('Displays weather information for a specified city.')
         .addStringOption(option =>
@@ -24,7 +29,24 @@ module.exports = {
             response.on('end', () => {
                 const weatherData = JSON.parse(data);
                 if (response.statusCode === 200) {
-                    interaction.reply(`${formatDiscordMsg} Weather in ${city}: ${weatherData.weather[0].description}, Temperature: ${weatherData.main.temp}°C, Sunrise: ${convertUnixToTime(weatherData.sys.sunrise)}, Sunset: ${convertUnixToTime(weatherData.sys.sunset)} ${formatDiscordMsg} `);
+                    if (response.statusCode === 200) {
+                        const description = weatherData.weather[0].description;
+                        const temp = weatherData.main.temp;
+                        const sunrise = convertUnixToTime(weatherData.sys.sunrise);
+                        const sunset = convertUnixToTime(weatherData.sys.sunset);
+                    
+                        const formattedMessage = `
+                    🌆 **Weather in ${city}:**
+                    
+                    ${weatherEmoji} **Description:** ${description}
+                    ${tempEmoji} **Temperature:** ${temp}°C
+                    ${sunriseEmoji} **Sunrise:** ${sunrise}
+                    ${sunsetEmoji} **Sunset:** ${sunset}
+                        `;
+                    
+                        interaction.reply(formattedMessage);
+                    }
+                    ;
                 } else {
                     console.error(`Failed to get weather data: ${weatherData.message}`);
                     interaction.reply(`Failed to get weather data for ${city}`);
