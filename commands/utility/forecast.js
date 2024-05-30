@@ -4,7 +4,7 @@ const https = require('https');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('forecast')
-        .setDescription('Displays a 3-day weather forecast for a specified city.')
+        .setDescription('Displays a 5-day weather forecast for a specified city.')
         .addStringOption(option =>
             option.setName('city')
                 .setDescription('The city to get the weather forecast for')
@@ -12,32 +12,76 @@ module.exports = {
     async execute(interaction) {
         const city = interaction.options.getString('city');
         const apiKey = process.env.WEATHER_API_KEY;
-        const url = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=3&units=metric&appid=${apiKey}`;
+        const latLongUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
-        https.get(url, response => {
+        // Fetch the coordinates for the city
+        https.get(latLongUrl, response => {
             let data = '';
             response.on('data', chunk => {
                 data += chunk;
             });
+
             response.on('end', () => {
-                const forecastData = JSON.parse(data);
-                if (response.statusCode === 200) {
-                    let forecastMsg = `🌆 **3-Day Weather Forecast for ${city}**:\n\n`;
-                    forecastData.list.forEach(day => {
-                        const date = new Date(day.dt * 1000).toLocaleDateString();
-                        const description = day.weather[0].description;
-                        const tempDay = day.temp.day;
-                        const tempNight = day.temp.night;
-                        forecastMsg += `📅 **Date**: ${date}\n${description}, 🌡️ **Day Temp**: ${tempDay}°C, 🌙 **Night Temp**: ${tempNight}°C\n\n`;
-                    });
-                    interaction.reply(forecastMsg);
-                } else {
-                    interaction.reply(`Failed to get weather forecast for ${city}`);
+                try {
+                    const weatherData = JSON.parse(data);
+                    if (response.statusCode === 200) {
+                        const { lat, lon } = weatherData.coord;
+                        fetchForecast(interaction, city, apiKey, lat, lon);
+                    } else {
+                        interaction.reply(`Failed to get the coordinates of ${city}, please check if you've given the correct city name!`);
+                    }
+                } catch (error) {
+                    console.error(error);
+                    interaction.reply('Error parsing weather data.');
                 }
             });
         }).on('error', error => {
             console.error(error);
-            interaction.reply('Error fetching weather forecast.');
+            interaction.reply('Error fetching weather data, please try again later.');
         });
     }
 };
+
+async function fetchForecast(interaction, city, apiKey, lat, lon) {
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+    https.get(forecastUrl, response => {
+        let data = '';
+        response.on('data', chunk => {
+            data += chunk;
+        });
+
+        response.on('end', () => {
+            try {
+                const forecastData = JSON.parse(data);
+                if (response.statusCode === 200) {
+                    formatAndReplyForecast(interaction, city, forecastData);
+                } else {
+                    interaction.reply(`Failed to get weather forecast for ${city}`);
+                }
+            } catch (error) {
+                console.error(error);
+                interaction.reply('Error parsing forecast data.');
+            }
+        });
+    }).on('error', error => {
+        console.error(error);
+        interaction.reply('Error fetching weather forecast.');
+    });
+}
+
+function formatAndReplyForecast(interaction, city, forecastData) {
+    let forecastMsg = "```";
+    forecastMsg += `5-Day Weather Forecast for ${city}:\n\n`;
+
+    for (let i = 0; i <= 4; i++) {
+        const forecast = forecastData.list[i];
+        const date = new Date(forecast.dt * 1000);
+        forecastMsg += `${date.toDateString()} ${date.toTimeString().split(' ')[0]}\n`;
+        forecastMsg += `Temperature: ${forecast.main.temp}°C (Feels like: ${forecast.main.feels_like}°C)\n`;
+        forecastMsg += `Weather: ${forecast.weather[0].description}\n`;
+        forecastMsg += `Humidity: ${forecast.main.humidity}%\n`;
+        forecastMsg += `Wind Speed: ${forecast.wind.speed} m/s\n\n`;
+    }
+    forecastMsg += "```";
+    interaction.reply(forecastMsg);
+}
