@@ -38,8 +38,8 @@ client.once('ready', () => {
     // Set the bot's activity status
     client.user.setPresence({
         activities: [{
-            name: 'with happiness',
-            type: ActivityType.Competing, 
+            name: 'to /help',
+            type: ActivityType.Listening, 
             url: 'https://github.com/SlytherSavior/Test-Bot'
         }],
     });
