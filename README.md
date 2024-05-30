@@ -7,7 +7,6 @@ Weatheria is a Discord bot designed to provide comprehensive weather updates. Bu
 - **Current Weather**: Fetches current weather information for any city.
 - **Weather Forecast**: Provides 5-day weather forecasts for any city.
 - **Multi-city Weather**: Fetches weather information for multiple cities at once.
-- **Help Command**: Lists all available commands and their usage.
 
 ## 🛠️ Technologies Used
 
@@ -36,9 +35,9 @@ Weatheria is now finalized and available for deployment in Discord servers. This
 
 ### Example
 
-/weather Kathmandu
-/forecast Kathmandu
-/multiweather Kathmandu, Pokhara, Lalitpur
+- /weather Kathmandu
+- /forecast Kathmandu
+- /multiweather Kathmandu, Pokhara, Lalitpur
 
 
 ## 🌐 Live Link
@@ -50,8 +49,10 @@ Weatheria is now finalized and available for deployment in Discord servers. This
 To set up Weatheria locally, follow these steps:
 
 1. **Clone the Repository**
+    Ensure you have access to the repository. If not, request access from the repository owner.
+
     ```bash
-    git clone https://github.com/your-username/weatheria.git
+    git clone https://github.com/SlytherSavior/weatheria.git
     cd weatheria
     ```
 
@@ -96,4 +97,3 @@ For any questions or suggestions, feel free to reach out:
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
