@@ -22,7 +22,7 @@ Weatheria is a Discord bot designed to provide comprehensive weather updates. Bu
 
 ## 🚧 Current Status
 
-Weatheria is now finalized and available for deployment in Discord servers. This project has been a significant step in the journey to becoming a proficient full-stack developer.
+Weatheria and its basic functionalities is done! and available for deployment in Discord servers. This project has been a significant step in the journey to becoming a proficient full-stack developer.
 
 ## 📋 Usage
 
