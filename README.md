@@ -40,9 +40,9 @@ Weatheria and its basic functionalities is done! and available for deployment in
 - /multiweather Kathmandu, Pokhara, Lalitpur
 
 
-## 🌐 Live Link
+## 🌐 Invite Link
 
-*Coming soon!*
+*[Currently Offline](https://discord.com/oauth2/authorize?client_id=1244350935975596146)*
 
 ## ⚙️ Setup
 
