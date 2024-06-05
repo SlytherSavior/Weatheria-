@@ -42,7 +42,7 @@ Weatheria and its basic functionalities is done! and available for deployment in
 
 ## 🌐 Invite Link
 
-*[Currently Offline](https://discord.com/oauth2/authorize?client_id=1244350935975596146)*
+*[Currently Offline](https://discord.com/oauth2/authorize?client_id=1244350935975596146)* ( lookin for good and free hosting services ) 
 
 ## ⚙️ Setup
 
