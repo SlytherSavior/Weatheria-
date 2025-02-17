@@ -89,7 +89,7 @@ To set up Weatheria locally, follow these steps:
 
 For any questions or suggestions, feel free to reach out:
 
-- **📧 Email**: shrijan5414@gmail.com
+- **📧 Email**: contact@shrijanpoudel.com.np
 - **🔗 LinkedIn**: [linkedin.com/in/slyther](https://linkedin.com/in/slyther)
 - **🐦 Twitter**: [twitter.com/SlytherShrijan](https://x.com/SlytherShrijan)
 - **🌐 Website**: [shrijanpoudel.com.np](https://www.shrijanpoudel.com.np)
